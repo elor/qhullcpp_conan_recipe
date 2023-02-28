@@ -1,0 +1,34 @@
+[settings]
+    arch=armv8
+    build_type=Release
+    compiler=apple-clang
+    compiler.version=14
+    os=Macos
+
+[requires]
+
+
+[options]
+    fPIC=True
+    shared=False
+
+[full_settings]
+    arch=armv8
+    build_type=Release
+    compiler=apple-clang
+    compiler.version=14
+    os=Macos
+
+[full_requires]
+
+
+[full_options]
+    fPIC=True
+    reentrant=True
+    shared=False
+
+[recipe_hash]
+
+
+[env]
+

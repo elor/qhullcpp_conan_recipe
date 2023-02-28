@@ -1,0 +1,22 @@
+{
+ "options": [
+  [
+   "fPIC",
+   "True"
+  ],
+  [
+   "reentrant",
+   "True"
+  ],
+  [
+   "shared",
+   "False"
+  ]
+ ],
+ "root": {
+  "name": "qhull",
+  "version": null,
+  "user": null,
+  "channel": null
+ }
+}
