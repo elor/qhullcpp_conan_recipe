@@ -9,6 +9,7 @@ required_conan_version = ">=1.47.0"
 
 class QhullConan(ConanFile):
     name = "qhull"
+    version = "8.0.1"
     description = "Qhull computes the convex hull, Delaunay triangulation, " \
                   "Voronoi diagram, halfspace intersection about a point, " \
                   "furthest-site Delaunay triangulation, and furthest-site " \
@@ -89,12 +90,21 @@ class QhullConan(ConanFile):
         self.cpp_info.set_property(
             "pkg_config_name", self._qhull_pkgconfig_name)
 
+
         # TODO: back to global scope once cmake_find_package* generators removed
         self.cpp_info.components["libqhull"].libs = [self._qhull_lib_name]
         if self.settings.os in ["Linux", "FreeBSD"]:
             self.cpp_info.components["libqhull"].system_libs.append("m")
         if is_msvc(self) and self.options.shared:
             self.cpp_info.components["libqhull"].defines.extend(
+                ["qh_dllimport"])
+
+        # TODO: back to global scope once cmake_find_package* generators removed
+        self.cpp_info.components["libqhullcpp"].libs = [self._qhull_libcpp_name]
+        if self.settings.os in ["Linux", "FreeBSD"]:
+            self.cpp_info.components["libqhullcpp"].system_libs.append("m")
+        if is_msvc(self) and self.options.shared:
+            self.cpp_info.components["libqhullcpp"].defines.extend(
                 ["qh_dllimport"])
 
         bin_path = os.path.join(self.package_folder, "bin")
@@ -143,4 +153,11 @@ class QhullConan(ConanFile):
                 name += "r"
             if self.settings.build_type == "Debug":
                 name += "d"
+        return name
+
+    @property
+    def _qhull_libcpp_name(self):
+        name = "qhullcpp"
+        if self.settings.build_type == "Debug":
+            name += "d"
         return name
